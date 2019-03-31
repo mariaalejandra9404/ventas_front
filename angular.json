@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ventas": {
+    "angular6-start": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,19 +13,27 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ventas",
+            "outputPath": "dist/angular6-start",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/css",
+              "src/data"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -58,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ventas:build"
+            "browserTarget": "angular6-start:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ventas:build:production"
+              "browserTarget": "angular6-start:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ventas:build"
+            "browserTarget": "angular6-start:build"
           }
         },
         "test": {
@@ -103,7 +111,7 @@
         }
       }
     },
-    "ventas-e2e": {
+    "angular6-start-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -112,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ventas:serve"
+            "devServerTarget": "angular6-start:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ventas:serve:production"
+              "devServerTarget": "angular6-start:serve:production"
             }
           }
         },
@@ -132,5 +140,5 @@
       }
     }
   },
-  "defaultProject": "ventas"
+  "defaultProject": "angular6-start"
 }

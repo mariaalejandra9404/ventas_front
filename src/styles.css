@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+body, html {
+	font-family: 'Open Sans', sans-serif;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	color: #666;
+	font-weight: 400;
+	width: 100% !important;
+	height: 100% !important;
+	padding-top: 25px;
+	
+}
+
+h1{
+    margin: 0;
+}
+
+h2 {
+	margin: 0 0 20px 0;
+	font-weight: 600;
+	font-size: 36px;
+	color: #333;
+}
+h3, h4 {
+	font-size: 20px;
+	font-weight: 400;
+	color: #333;
+}
+h5 {
+	text-transform: uppercase;
+	font-weight: 700;
+	line-height: 20px;
+}
+p {
+	font-size: 15px;
+}
+p.intro {
+	margin: 12px 0 0;
+	line-height: 24px;
+}
+a {
+	color: #6aaf08;
+	font-weight: 400;
+}
+a:hover, a:focus {
+	text-decoration: none;
+	color: #222;
+}
+ul, ol {
+	list-style: none;
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+ul, ol {
+	padding: 0;
+	
+}
+hr {
+	height: 3px;
+	width: 70px;
+	text-align: center;
+	position: relative;
+	background: #6aaf08;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border: 0;
+}
