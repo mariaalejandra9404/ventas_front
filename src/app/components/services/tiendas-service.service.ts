@@ -1,17 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-import {
-  map,
-  switchMap,
-  debounceTime,
-  distinctUntilChanged
-} from 'rxjs/operators';
-
-export interface Config {
-  results: string[]
-}
+import { ObjectUnsubscribedError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +12,7 @@ export class TIendasServiceService {
   
   
   basepath: string
-  private products  = []; 
-  
-  documentToDomainObject = _ => {
-    const object = _.payload.doc.data();
-    object.id = _.payload.doc.id;
-    return object;
-}
+   
 
   constructor(private http : HttpClient) { 
     this.basepath  = 'http://localhost:4000/api/'
@@ -38,5 +21,22 @@ export class TIendasServiceService {
   
   getAll(term) {
     return this.http.get(this.basepath + term)
+  }
+
+  getById(term, id: number) {
+    return this.http.get(this.basepath + term + '/' + id);
+  }
+
+  create(term, objeto) {
+    return this.http.post(this.basepath + term, objeto);
+  }
+
+  update(term, objeto, id) {
+    console.log("er", term, objeto,id)
+    return this.http.put(this.basepath + term +'/' + id, objeto);
+  }
+
+  delete(term,id: number) {
+    return this.http.delete(this.basepath + term + '/' + id);
   }
 }

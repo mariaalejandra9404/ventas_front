@@ -1,23 +1,65 @@
+<!-- Editable table -->
 
-<table mat-table [dataSource]="tiendas" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Tiendas</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success" (click)="add()">
+          <mat-icon fas icon="plus" size="2x"></mat-icon>
+        </a>
+      </span>
 
-  <!-- Position Column -->
+      <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear Tienda</button>
+      <br>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Ubicacion</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+        <tr *ngFor="let tienda of tiendas; let id = index">
+          <td>
+            <span (keyup)="changeValue(id, 'nombre', $event)" (blur)="updateList(id, 'nombre', $event)" contenteditable="true">{{tienda.nombre}}</span>
+          </td>
+          <td>
+            <span contenteditable="true" (keyup)="changeValue(tienda, 'ubicacion', $event)" (blur)="updateList(id, 'ubicacion', $event)">{{tienda.ubicacion}}</span>
+          </td>
+          
+          <td>
+            <span class="table-remove">
+              <button type="button" class="btn btn-lg btn-outline-primary" (click)="remove(tienda)">Eliminar</button>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-  </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="ubicacion">
-    <th mat-header-cell *matHeaderCellDef> Ubicación </th>
-    <td mat-cell *matCellDef="let element"> {{element.ubicacion}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nueva Tienda</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="new_nombre">Nombre</label>
+        <input id="new_nombre" class="form-control" placeholder="Nombre" name="new_nombre" [(ngModel)]="new_nombre">
+        <br>
+        <label for="new_ubicacion">Ubicacion</label>
+        <input id="new_ubicacion" class="form-control" placeholder="Ubicación" name="new_ubicacion" [(ngModel)]="new_ubicacion" >
+               
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="add()">Save</button>
+  </div>
+</ng-template>

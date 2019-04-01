@@ -4,36 +4,39 @@ import swal from 'sweetalert';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
-export interface Tienda {
+export interface Producto {
   id: number,
   nombre: string,
-  ubicacion: string
+  descripcion: string,
+  precio_unidad: number
 }
 
 
 
 @Component({
-  selector: 'app-tiendas',
-  templateUrl: './tiendas.component.html',
-  styleUrls: ['./tiendas.component.css']
+  selector: 'app-productos',
+  templateUrl: './productos.component.html',
+  styleUrls: ['./productos.component.css']
 })
 
 
 
-export class TiendasComponent implements OnInit {
+export class ProductosComponent implements OnInit {
 
-  tiendas;
+  productos;
   closeResult: string;
   new_nombre:string;
-  new_ubicacion:string;
-  displayedColumns: string[] = ['nombre','ubicacion'];
-  dataSource = this.tiendas;
+  new_descripcion:string;
+  new_precio:string;
+  displayedColumns: string[] = ['nombre','descripcion','precio_unidad'];
+  dataSource = this.productos;
+
   constructor(private modalService: NgbModal,private tiendasSvc: TIendasServiceService) { }
 
   ngOnInit() {
-    this.tiendasSvc.getAll('tiendas').subscribe(data => {
-      this.tiendas = data['data'];
-      console.log("arreglo tiendas",this.tiendas)
+    this.tiendasSvc.getAll('productos').subscribe(data => {
+      this.productos = data['data'];
+      console.log("arreglo productos",this.productos)
       
     });
    
@@ -62,11 +65,11 @@ export class TiendasComponent implements OnInit {
 
     updateList(id: number, property: string, event: any) {
       const editField = event.target.textContent;
-      this.tiendas[id][property] = editField   
+      this.productos[id][property] = editField   
       var objeto_a_editar = {
-        "tienda": this.tiendas[id]
+        "producto": this.productos[id]
         }
-      this.tiendasSvc.update('tiendas', objeto_a_editar, objeto_a_editar["tienda"].id).subscribe(data => {
+      this.tiendasSvc.update('productos', objeto_a_editar, objeto_a_editar["producto"].id).subscribe(data => {
                
       });
      
@@ -74,7 +77,7 @@ export class TiendasComponent implements OnInit {
 
     remove(objeto: any) {
  
-      this.tiendasSvc.delete('tiendas', objeto.id).subscribe(data => {
+      this.tiendasSvc.delete('productos', objeto.id).subscribe(data => {
             if(data == null){
               swal({
                 title: '¡WOW!',
@@ -93,16 +96,17 @@ export class TiendasComponent implements OnInit {
 
     add() {
       console.log("hoooli")
-      console.log(this.new_nombre, this.new_ubicacion)
+      console.log(this.new_nombre, this.new_descripcion, this.new_precio)
       var objeto_nuevo = {
-        "tienda":{
+        "producto":{
           
           "nombre": this.new_nombre,
-          "ubicacion":this.new_ubicacion
+          "descripcion":this.new_descripcion,
+          "precio_unidad": parseInt(this.new_precio)
            }
         }
         
-      this.tiendasSvc.create('tiendas', objeto_nuevo).subscribe(data => {
+      this.tiendasSvc.create('productos', objeto_nuevo).subscribe(data => {
 
         if(data != null){
           swal({

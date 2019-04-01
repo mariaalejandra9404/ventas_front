@@ -1,0 +1,70 @@
+<!-- Editable table -->
+
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Productos</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success" (click)="add()">
+          <mat-icon fas icon="plus" size="2x"></mat-icon>
+        </a>
+      </span>
+
+      <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear Producto</button>
+      <br>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Descripción</th>
+          <th class="text-center">Precio por unidad</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+        <tr *ngFor="let producto of productos; let id = index">
+          <td>
+            <span (keyup)="changeValue(id, 'nombre', $event)" (blur)="updateList(id, 'nombre', $event)" contenteditable="true">{{producto.nombre}}</span>
+          </td>
+          <td>
+            <span contenteditable="true" (keyup)="changeValue(producto, 'descripcion', $event)" (blur)="updateList(id, 'descripcion', $event)">{{producto.descripcion}}</span>
+          </td>
+          <td>
+            <span contenteditable="true" (keyup)="changeValue(producto, 'precio_unidad', $event)" (blur)="updateList(id, 'precio_unidad', $event)">{{producto.precio_unidad}}</span>
+          </td>
+          <td>
+            <span class="table-remove">
+              <button type="button" class="btn btn-lg btn-outline-primary" (click)="remove(producto)">Eliminar</button>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nueva Producto</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="new_nombre">Nombre</label>
+        <input id="new_nombre" class="form-control" placeholder="Nombre" name="new_nombre" [(ngModel)]="new_nombre">
+        <br>
+        <label for="new_descripcion">Descripcion</label>
+        <input id="new_descripcion" class="form-control" placeholder="Ubicación" name="new_descripcion" [(ngModel)]="new_descripcion" >
+        <br>
+        <label for="new_precio">Precio</label>
+        <input id="new_precio" class="form-control" placeholder="Ubicación" name="new_precio" [(ngModel)]="new_precio" >
+     
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="add()">Save</button>
+  </div>
+</ng-template>

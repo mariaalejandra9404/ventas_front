@@ -10,6 +10,12 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { TiendasComponent } from './components/tiendas/tiendas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatIconModule } from "@angular/material/icon"; 
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductosComponent } from './components/productos/productos.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +24,19 @@ import { MatTableModule } from '@angular/material';
     HomeComponent,
     FooterComponent,
     NavigationComponent,
-    TiendasComponent
+    TiendasComponent,
+    ProductosComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
